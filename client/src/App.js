@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen'; // ⬅️ Add this line
+import Header from './components/Header';
+import CartScreen from './screens/CartScreen';
+
+
+
 
 function App() {
-  const [message, setMessage] = useState('')
-
-  useEffect(() => {
-    // Make GET request to backend
-    axios.get('http://localhost:5000/')
-      .then(res => setMessage(res.data)) // Set the response data to state
-      .catch(err => console.error(err))
-  }, [])
-
   return (
-    <div>
-      <header>
-        <h1>eCommerce Website</h1>
-      </header>
-      <main>
-        <h2>{message}</h2>  {/* Display the message from the backend */}
+    <Router>
+      <Header />
+      <main className="p-4">
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/cart/:id?" element={<CartScreen />} />
+          <Route path="/product/:id" element={<ProductScreen />} /> {/* ⬅️ New route */}
+        </Routes>
       </main>
-      <footer>
-        <p>&copy; 2025 eShop</p>
-      </footer>
-    </div>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
