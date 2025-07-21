@@ -5,6 +5,9 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes'); // Import the auth routes
 const userRoutes = require('./routes/userRoutes');  // Import user routes
 const devRoutes = require('./routes/devRoutes');  // Import dev routes
+const productRoutes = require('./routes/productRoutes')
+
+
 
 dotenv.config();
 connectDB();
@@ -19,7 +22,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);  // Register the user routes under /api/user
 app.use('/api/dev', devRoutes);  // Register dev routes
-
+app.use('/api/products', productRoutes)
 
 app.get('/', (req, res) => {
   res.send('API is running...');
