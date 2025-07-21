@@ -1,24 +1,21 @@
-const express = require('express')
-const cors = require('cors')
-const dotenv = require('dotenv')
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');  // Import the database connection
 
-// Initialize dotenv to read environment variables
-dotenv.config()
+dotenv.config();  // Load environment variables
+connectDB();  // Connect to MongoDB
 
-// Initialize Express
-const app = express()
-const PORT = process.env.PORT || 5000
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors())  // Enable Cross-Origin Resource Sharing
-app.use(express.json())  // Parse incoming JSON requests
+app.use(cors());
+app.use(express.json());  // Allow JSON payloads in requests
 
-// Basic route
 app.get('/', (req, res) => {
-  res.send('Hello from Express Backend!')
-})
+  res.send('API is running...');
+});
 
-// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
-})
+  console.log(`Server running on http://localhost:${PORT}`);
+});
